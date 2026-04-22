@@ -11,6 +11,8 @@ graph_a = {
 }
 
 def find_path(graph, trace, destination, omit_list=[]):
+    if omit_list == []:
+        omit_list.append(trace[0])
     location = trace[-1]
     node_connections = []
     
