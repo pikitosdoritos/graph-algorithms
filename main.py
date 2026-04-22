@@ -8,7 +8,7 @@ graph_a = {
 }
 
 def find_path(graph, start, finish):
-    def find_path(graph, finish, path, omit_list=[]):
+    def find_path(path, omit_list=[]):
         current = path[-1]
         connected_nodes = list(filter(lambda node: node not in omit_list, graph[current]))
         
@@ -16,13 +16,13 @@ def find_path(graph, start, finish):
             return [*path, finish]
         
         for node in connected_nodes:
-            result = find_path(graph_a, finish, [*path, node], omit_list=[*omit_list, *connected_nodes])
+            result = find_path([*path, node], omit_list=[*omit_list, *connected_nodes])
             
             if result:
                 return result
             
         return None
     
-    return find_path(graph, finish, [start]) 
+    return find_path([start]) 
 
 print(find_path(graph_a, "A", "E"))
