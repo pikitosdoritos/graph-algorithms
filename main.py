@@ -7,20 +7,22 @@ graph_a = {
     "F": ["B", "E"],
 }
 
-def find_path(graph, finish, path, omit_list=[]):
-    current = path[-1]
-    connected_nodes = list(filter(lambda node: node not in omit_list, graph[current]))
-    
-    if finish in connected_nodes:
-        return [*path, finish]
-    
-    for node in connected_nodes:
-        result = find_path(graph_a, finish, [*path, node], omit_list=[*omit_list, *connected_nodes])
+def find_path(graph, start, finish):
+    def find_path(graph, finish, path, omit_list=[]):
+        current = path[-1]
+        connected_nodes = list(filter(lambda node: node not in omit_list, graph[current]))
         
-        if result:
-            return result
+        if finish in connected_nodes:
+            return [*path, finish]
         
-    return None
+        for node in connected_nodes:
+            result = find_path(graph_a, finish, [*path, node], omit_list=[*omit_list, *connected_nodes])
+            
+            if result:
+                return result
+            
+        return None
     
-    
-print(find_path(graph_a, "A", ["E"]))
+    return find_path(graph, finish, [start]) 
+
+print(find_path(graph_a, "A", "E"))
