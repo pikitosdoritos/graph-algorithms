@@ -12,8 +12,7 @@ def find_path(graph, finish, path, omit_list=[]):
     connected_nodes = list(filter(lambda node: node not in omit_list, graph[current]))
     
     if finish in connected_nodes:
-        path.append(finish)
-        return path
+        return [*path, finish]
     
     for node in connected_nodes:
         result = find_path(graph_a, finish, [*path, node], omit_list=[*omit_list, *connected_nodes])
